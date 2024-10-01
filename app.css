@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Include Bootstrap CSS after Tailwind directives */
+@import 'bootstrap.min.css';
+
+.rotate {
+    @apply transform rotate-180;
+  }
+
+  .group-hover\:-translate-y-1 {
+    transform: translateY(-0.25rem);
+  }
+
+  .dropdown-menu button:hover {
+    background-color: #d9d9d9;
+}
+
