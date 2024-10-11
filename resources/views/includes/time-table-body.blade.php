@@ -29,8 +29,8 @@
     //
     $currentDate = Carbon\Carbon::now();
 
-    $previousMonthStart = Carbon\Carbon::parse($year . '-' . $month . '-16');
-    $currentMonthStart = Carbon\Carbon::parse($year . '-' . $month . '-16');
+    $previousMonthStart = $startDate;
+    $currentMonthStart = $endDate;
     $daysInPreviousMonth = $previousMonthStart->daysInMonth;
     $totalMinutesForMonth = 0; // Initialize total hours for the month
 @endphp
@@ -92,22 +92,23 @@
                     </div>
                 </div>
 
-                      @if(!in_array($timeOffRecordForDay->status, ['approved', 'denied']))
-                        <button onclick="openEditModal('{{ $timeOffRecordForDay->id }}', '{{ $day->format('Y-m-d') }}', '{{ $timeOffRecordForDay->attendance_type_records_id }}', '{{ $timeOffRecordForDay->reason_select }}', '{{ $timeOffRecordForDay->reason }}', '{{ $timeOffRecordForDay->boss_id }}')"
-                          class="text-blue-500 hover:underline text-m font-semibold mt-1 block w-full text-center">
-                          編集
-                        </button>
-                      @endif
-
-                    @elseif ($isHoliday)
-                      <span class="bg-yellow-100 text-yellow-700 px-1 sm:px-2 py-1 text-xs font-semibold rounded-full block text-center">公休</span>
-                    @else
-                      <button onclick="openModal('{{ $day->format('Y-m-d') }}')"
-                        class="text-blue-500 hover:underline text-m block w-full text-center font-semibold">
-                        申請
-                      </button>
-                    @endif
-                  </td>
+                @if (!in_array($timeOffRecordForDay->status, ['approved', 'denied']))
+                    <button
+                        onclick="openEditModal('{{ $timeOffRecordForDay->id }}', '{{ $day->format('Y-m-d') }}', '{{ $timeOffRecordForDay->attendance_type_records_id }}', '{{ $timeOffRecordForDay->reason_select }}', '{{ $timeOffRecordForDay->reason }}', '{{ $timeOffRecordForDay->boss_id }}')"
+                        class="text-blue-500 hover:underline text-m font-semibold mt-1 block w-full text-center">
+                        編集
+                    </button>
+                @endif
+            @elseif ($isHoliday)
+                <span
+                    class="bg-yellow-100 text-yellow-700 px-1 sm:px-2 py-1 text-xs font-semibold rounded-full block text-center">公休</span>
+            @else
+                <button onclick="openModal('{{ $day->format('Y-m-d') }}')"
+                    class="text-blue-500 hover:underline text-m block w-full text-center font-semibold">
+                    申請
+                </button>
+            @endif
+        </td>
 
 
 
@@ -596,6 +597,4 @@
                 });
         }
     }
-
-
 </script>

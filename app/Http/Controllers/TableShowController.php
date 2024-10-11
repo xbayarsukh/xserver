@@ -27,10 +27,6 @@ class TableShowController extends Controller
         $today = Carbon::today();
         $dayOfMonth = $today->day;
 
-        if ($dayOfMonth >= 1 && $dayOfMonth <= 16) {
-            // Return the previous month
-            $month = $today->subMonth()->format('m'); // or 'Y-m' for Year-Month format
-        }
         $givenDate = Carbon::parse($year . '-' . $month . '-16');
         
         // Default logic for 1st to 15th
@@ -142,6 +138,7 @@ class TableShowController extends Controller
         'bosses' => $bosses,
         'breaks' => $breaks,
     ])->render();
+    // return ["break"=>$breaks, "start" => $startDate, "end" => $endDate];
 
 
     return view('dashboard', compact('tbody'));
